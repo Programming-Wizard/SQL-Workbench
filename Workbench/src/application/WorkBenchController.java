@@ -1,6 +1,7 @@
 package application;
 
 import java.net.URL;
+import java.security.PublicKey;
 import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
@@ -42,8 +43,15 @@ public class WorkBenchController implements Initializable {
                 lineCount++;
                 Linecontainer.getChildren().add(new Text(" " + String.valueOf(lineCount)));
             }
+        	
         });
+        
         
     }
 	
+	public void getworkbenchtext()
+	{
+		System.out.println(WorkBench.getText());
+	}
 }
+
