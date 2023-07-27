@@ -5,6 +5,8 @@ import java.util.ResourceBundle;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.VBox;
@@ -15,11 +17,13 @@ public class WorkBenchController implements Initializable {
 	private VBox Linecontainer;
 	@FXML
 	private TextArea WorkBench;
+	@FXML
+	private ScrollPane scrollPane;
 	
 	private int lineCount = 1;
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
-        Linecontainer.getChildren().add(new Text("1"));
+        Linecontainer.getChildren().add(new Text(" 1"));
 
         WorkBench.setOnKeyPressed(event -> 
         {
@@ -32,13 +36,15 @@ public class WorkBenchController implements Initializable {
         		WorkBench.positionCaret(CursorPosition + 1);
         		
                 lineCount++;
-                Linecontainer.getChildren().add(new Text(String.valueOf(lineCount)));
+                Linecontainer.getChildren().add(new Text(" "+String.valueOf(lineCount)));
         	}
         	else if (event.getCode() == KeyCode.ENTER) 
         	{
                 lineCount++;
-                Linecontainer.getChildren().add(new Text(String.valueOf(lineCount)));
+                Linecontainer.getChildren().add(new Text(" " + String.valueOf(lineCount)));
             }
         });
+        
     }
+	
 }
