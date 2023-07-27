@@ -1,8 +1,14 @@
 package application;
 
 import java.net.URL;
-import java.security.PublicKey;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ResourceBundle;
+
+import com.mysql.cj.protocol.Resultset;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -30,6 +36,7 @@ public class WorkBenchController implements Initializable {
         	if (event.isControlDown() && (event.getCode() == KeyCode.ENTER)) {
         		
         		int CursorPosition = WorkBench.getCaretPosition();
+        		System.out.println(CursorPosition);
         		
         		WorkBench.replaceSelection("\n");
         		
@@ -46,12 +53,50 @@ public class WorkBenchController implements Initializable {
         	
         });
         
-        
+    
     }
 	
-	public void getworkbenchtext()
+	
+	public void workbenchdata()
 	{
-		System.out.println(WorkBench.getText());
+		String Data = WorkBench.getText();
+		String username = "root";
+		String password = "zephrus_02";
+		String url = "jdbc:mysql://localhost:3306/my_database";
+		
+		try {
+			Class.forName("com.mysql.cj.jdbc.Driver");
+			
+			Connection con = DriverManager.getConnection(url, username, password);
+			Statement stmt = con.createStatement();
+			String sqlQuery = Data;
+//			try {
+//			int resultSet = stmt.executeUpdate(sqlQuery);
+			ResultSet resultSet = stmt.executeQuery(sqlQuery);
+			System.out.println("query executed succesfully");
+//			}
+//			catch (Exception e) {
+//				System.out.println(e);
+//			}
+			
+			while(resultSet.next())
+			{
+				int id = resultSet.getInt("id");
+				String name = resultSet.getString("name");
+				int age = resultSet.getInt("age");
+				String email = resultSet.getString("email");
+				System.out.println("id : " + id + ", name : " + name + ", age : " + age + ", email" + email);
+			}
+			stmt.close();
+			con.close();
+		} catch (ClassNotFoundException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
+
 }
 

@@ -50,7 +50,7 @@
                 </Menu>
               </menus>
             </MenuBar>
-            <ImageView fitHeight="25.0" fitWidth="21.0" onMouseClicked="#getworkbenchtext" pickOnBounds="true" preserveRatio="true">
+            <ImageView fitHeight="25.0" fitWidth="21.0" onMouseClicked="#workbenchdata" pickOnBounds="true" preserveRatio="true">
                <image>
                   <Image url="@Execute_Button.png" />
                </image>
