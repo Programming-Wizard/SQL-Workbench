@@ -1,0 +1,11 @@
+.glassy-text-area {
+	text-area-background: rgba(103, 125, 224, 0.6);
+    -fx-background-insets: 5;
+    -fx-text-fill: black; 
+    -fx-font-size: 14px;
+}
+
+.glassy-text-area .content{
+	-fx-background-color: text-area-background;
+	
+}
