@@ -1,6 +1,9 @@
 package application;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import javafx.animation.KeyFrame;
@@ -27,7 +30,7 @@ public class ControllerForLogin implements Initializable {
 	private PasswordField password;
 	private Media media;
 	private MediaPlayer mediaplayer;
-	//	public boolean loginRequested = false;
+	// public boolean loginRequested = false;
 	private static String usernameData;
 	private static String passwordData;
 	private Timeline hoverAnimation;
@@ -42,52 +45,92 @@ public class ControllerForLogin implements Initializable {
 		mediaplayer.setCycleCount(MediaPlayer.INDEFINITE);
 		createHoverAnimation();
 		createNotHoveredAnimation();
-		
+
 		loginBtn.setOnMouseEntered(event -> onMouseEntered());
 		loginBtn.setOnMouseExited(event -> onMouseExited());
-		
+
 	}
-	private void createHoverAnimation() {
+
+	private void createHoverAnimation() 
+	{
 		hoverAnimation = new Timeline();
 		hoverAnimation.getKeyFrames().addAll(
 				new KeyFrame(Duration.ZERO, new KeyValue(loginBtn.translateYProperty(), 0)),
-				new KeyFrame(Duration.millis(50), new KeyValue(loginBtn.translateYProperty(), -5))
-				);
+				new KeyFrame(Duration.millis(50), new KeyValue(loginBtn.translateYProperty(), -5)));
 	}
 
-	private void createNotHoveredAnimation() {
+	private void createNotHoveredAnimation() 
+	{
 		notHoveredAnimation = new Timeline();
 		notHoveredAnimation.getKeyFrames().addAll(
 				new KeyFrame(Duration.ZERO, new KeyValue(loginBtn.translateYProperty(), 0)),
-				new KeyFrame(Duration.millis(50), new KeyValue(loginBtn.translateYProperty(), 5))
-				);
+				new KeyFrame(Duration.millis(50), new KeyValue(loginBtn.translateYProperty(), 5)));
 	}
 
-	public void onMouseEntered() {
+	public void onMouseEntered() 
+	{
 		loginBtn.setStyle("-fx-background-color: rgba(225,174,202,0.1); ");
 		hoverAnimation.play();
 	}
 
-	public void onMouseExited() {
+	public void onMouseExited() 
+	{
 		loginBtn.setStyle("-fx-background-color: black; ");
 		notHoveredAnimation.play();
-	}	
-	public boolean loginRequest()
-	{
-		this.usernameData = username.getText();
-		this.passwordData = password.getText();
-		System.out.println("username : " + usernameData + "\npassword : " + passwordData);
-		return true;
 	}
 
-	public static String getUsername()
+	public boolean loginRequest() {
+		this.usernameData = username.getText();
+		this.passwordData = password.getText();
+		//		this.passwordData = hashPassword(password.getText());
+		//		System.out.println("username : " + usernameData + "\npassword : " + passwordData);
+		String url = "jdbc:mysql://localhost:3306/my_database";
+		if(passwordData.length() > 0)
+		{
+			try {
+				Class.forName("com.mysql.cj.jdbc.Driver");
+				Connection con = DriverManager.getConnection(url, usernameData, passwordData);
+				con.close();
+				return true;
+			} catch (ClassNotFoundException e) 
+			{
+				e.printStackTrace();
+			} catch (SQLException e) 
+			{
+				System.out.println("Invalid password or database connection error.Either try turning the service on for your SQL service or Enter correct password");
+				return false;
+			}
+			}
+		else
+		{
+			System.out.println("The password is required");
+		}
+		return false;
+	}
+
+	public static String getUsername() 
 	{
 		return usernameData;
 	}
-	public static String getPassword()
+
+	public static String getPassword() 
 	{
 		return passwordData;
 	}
 
+//		 private String hashPassword(String password) {
+//		        try {
+//		            MessageDigest md = MessageDigest.getInstance("SHA-256");
+//		            byte[] hashBytes = md.digest(password.getBytes());
+//		            StringBuilder sb = new StringBuilder();
+//		            for (byte b : hashBytes) {
+//		                sb.append(String.format("%02x", b));
+//		            }
+//		            return sb.toString();
+//		        } catch (NoSuchAlgorithmException e) {
+//		            e.printStackTrace();
+//		            return null;
+//		        }
+//		    }
 
 }
