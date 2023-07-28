@@ -29,10 +29,10 @@ public class WorkBenchController implements Initializable {
 	@Override
 	public void initialize(URL arg0, ResourceBundle arg1) {
 		Linecontainer.getChildren().add(new Text(" 1"));
-
+//		adding a text node in Vbox if enter or enter + ctrl is pressed
 		WorkBench.setOnKeyPressed(event -> {
+//			moving cursor to net line if ctrl + enter combination is used 
 			if (event.isControlDown() && (event.getCode() == KeyCode.ENTER)) {
-
 				int CursorPosition = WorkBench.getCaretPosition();
 				System.out.println(CursorPosition);
 
@@ -53,6 +53,7 @@ public class WorkBenchController implements Initializable {
 
 	}
 
+//		establishing connection with the server and executing the query
 	public void workbenchdata() 
 	{
 		String Data = WorkBench.getText();

@@ -51,6 +51,7 @@ public class ControllerForLogin implements Initializable {
 
 	}
 
+//	timeline for moving the login button up
 	private void createHoverAnimation() 
 	{
 		hoverAnimation = new Timeline();
@@ -59,6 +60,7 @@ public class ControllerForLogin implements Initializable {
 				new KeyFrame(Duration.millis(50), new KeyValue(loginBtn.translateYProperty(), -5)));
 	}
 
+//	timeline for moving the login button down again
 	private void createNotHoveredAnimation() 
 	{
 		notHoveredAnimation = new Timeline();
@@ -67,6 +69,7 @@ public class ControllerForLogin implements Initializable {
 				new KeyFrame(Duration.millis(50), new KeyValue(loginBtn.translateYProperty(), 5)));
 	}
 
+//	adding the methods to there appropriate listener
 	public void onMouseEntered() 
 	{
 		loginBtn.setStyle("-fx-background-color: rgba(225,174,202,0.1); ");
@@ -79,6 +82,7 @@ public class ControllerForLogin implements Initializable {
 		notHoveredAnimation.play();
 	}
 
+//	establishing and checking if there is no problem with making a connection with the server or the user entered password
 	public boolean loginRequest() {
 		this.usernameData = username.getText();
 		this.passwordData = password.getText();
@@ -107,7 +111,7 @@ public class ControllerForLogin implements Initializable {
 		}
 		return false;
 	}
-
+//	getting the user defined username and password using getters
 	public static String getUsername() 
 	{
 		return usernameData;
@@ -118,6 +122,7 @@ public class ControllerForLogin implements Initializable {
 		return passwordData;
 	}
 
+//	hashing algorithm to hash the user entered password
 //		 private String hashPassword(String password) {
 //		        try {
 //		            MessageDigest md = MessageDigest.getInstance("SHA-256");
