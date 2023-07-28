@@ -1,5 +1,4 @@
 package application;
-
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -7,8 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ResourceBundle;
-
-import com.mysql.cj.protocol.Resultset;
 
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -60,8 +57,8 @@ public class WorkBenchController implements Initializable {
 	public void workbenchdata()
 	{
 		String Data = WorkBench.getText();
-		String username = "root";
-		String password = "zephrus_02";
+		String username = ControllerForLogin.getUsername();
+		String password = ControllerForLogin.getPassword();
 		String url = "jdbc:mysql://localhost:3306/my_database";
 		
 		try {
@@ -90,10 +87,8 @@ public class WorkBenchController implements Initializable {
 			stmt.close();
 			con.close();
 		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
