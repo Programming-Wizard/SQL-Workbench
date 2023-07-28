@@ -24,7 +24,7 @@
             <Font size="20.0" />
          </font>
       </Text>
-      <Button layoutX="244.0" layoutY="260.0" mnemonicParsing="false" prefHeight="49.0" prefWidth="112.0" style="-fx-background-color: black; -fx-border-radius: 10;" text="Login" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="244.0" AnchorPane.rightAnchor="244.0" AnchorPane.topAnchor="260.0">
+      <Button fx:id="loginBtn" layoutX="244.0" layoutY="260.0" mnemonicParsing="false" onMouseClicked="#loginRequest" prefHeight="49.0" prefWidth="112.0" style="-fx-background-color: black;" text="Login" AnchorPane.bottomAnchor="91.0" AnchorPane.leftAnchor="244.0" AnchorPane.rightAnchor="244.0" AnchorPane.topAnchor="260.0">
          <font>
             <Font size="24.0" />
          </font>
